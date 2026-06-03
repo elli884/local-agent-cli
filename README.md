@@ -50,3 +50,14 @@ uv run guard.py
 ```
 
 Now you are ready!
+
+## Ollama Installation and Setup Guide
+
+### Install Ollama
+
+1. **Download and install** Ollama for your operating system from the official page:
+   [ollama.com/download](https://ollama.com/download)
+
+2. **Verify the installation** by checking the version in your terminal:
+   ```bash
+   ollama --version
