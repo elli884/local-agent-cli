@@ -4,7 +4,7 @@ The project is my own challenge to improve ai-skills and implement a really help
 
 If you are intersted in the process and want to use the final result, hit the star-button to be up to date :)
 
-# Day 1: Setup & Structured Validation — The Foundation of an AI Guardrail
+# Setup
 
 ## How to Get Ready
 
