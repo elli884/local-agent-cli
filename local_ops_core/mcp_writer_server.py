@@ -2,6 +2,7 @@ import json
 import os
 import sys
 import os
+import ast
 from pathlib import Path
 from secure_file_reader import ALLOWED_WORKSPACE
 
@@ -39,8 +40,31 @@ def execute_write(file_path: str, content: str) -> str:
 
     return f"Successfully written: {file_path}"
 
+def validate_and_execute_write(file_path: str, content: str) -> str:
+    # Check for Python syntax errors before writing
+    if file_path.endswith(".py"):
+        try:
+            ast.parse(content)
+        except SyntaxError as e:
+            # The error is caught and the file is not written
+            raise ValueError(
+                f"Python syntax validation failed. Invalid Python code detected! "
+                f"Line {e.lineno}: {e.msg}"
+            )
+
+    from mcp_writer_server import execute_write
+
+    return execute_write(file_path, content)
+
 
 if __name__ == "__main__":
     # Test run of the standalone write operation
-    print(execute_write("generated_code.py", "print('Hello from Local MCP AI')"))
-    print(execute_write("/wrong/malicious.py", "malicious content"))  # Should be blocked
+    # print(execute_write("generated_code.py", "print('Hello from Local MCP AI')"))
+    # print(execute_write("/wrong/malicious.py", "malicious content"))  # Should be blocked
+
+    # Test run of invalid code (missing closing quote)
+    broken_code = "print('This is a broken line of code"
+    try:
+        print(validate_and_execute_write("broken.py", broken_code))
+    except ValueError as e:
+        print(e)
