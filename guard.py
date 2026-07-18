@@ -18,7 +18,7 @@ class PromptInput(BaseModel):
 
         if any(keyword in value.lower() for keyword in forbidden_keywords):
             raise ValueError(
-                "🛑 Security risk detected: Unauthorized prompt content!🛑"
+                "Security risk detected: Unauthorized prompt content!"
             )
         return value
 

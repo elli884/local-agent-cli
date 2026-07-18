@@ -10,7 +10,7 @@ def safe_read_file(relative_path: str) -> str:
     # Security guardrail: Is the target path still inside the allowed workspace?
     if not target_path.is_relative_to(ALLOWED_WORKSPACE):
         raise PermissionError(
-            f"🚨 Security veto: Path traversal detected! Access denied for: {relative_path}"
+            f"Security veto: Path traversal detected! Access denied for: {relative_path}"
         )
 
     if not target_path.exists():
